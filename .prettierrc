@@ -1,0 +1,32 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "tabWidth": 4,
+  "bracketSpacing": true,
+  "printWidth": 120,
+  "bracketSameLine": false,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "singleAttributePerLine": true,
+  "endOfLine": "lf",
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@worldprinter/(.*)$",
+    "",
+    "^[./]"
+  ],
+  "importOrderCaseInsensitive": true,
+  "importOrderParserPlugins": [
+    "typescript",
+    "jsx",
+    "decorators-legacy"
+  ],
+  "importOrderMergeDuplicateImports": true,
+  "importOrderCombineTypeAndValueImports": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports"
+  ]
+}

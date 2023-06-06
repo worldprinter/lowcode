@@ -1,0 +1,24 @@
+@import '../../assets/styles/mixin.scss';
+
+.visualPanelBox {
+  padding: 0 15px 300px;
+
+  .header {
+    color: $fontColor;
+    display: flex;
+  }
+}
+
+//:global {
+.ant-collapse .ant-collapse-item .ant-collapse-header {
+  padding: 5px 5px 5px 10px;
+  align-items: center;
+  color: $fontColor;
+  font-size: 12px;
+
+  .ant-collapse-expand-icon {
+    padding-inline-end: 4px;
+  }
+}
+
+//}

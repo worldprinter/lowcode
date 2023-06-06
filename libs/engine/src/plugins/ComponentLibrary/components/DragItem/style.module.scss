@@ -1,0 +1,60 @@
+@import '../../../../assets/styles/mixin.scss';
+
+.square {
+  user-select: none;
+  position: relative;
+  flex: 33.3% 0;
+  &::before {
+    content: '';
+    padding-top: 100%;
+    float: left;
+  }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+.componentItem {
+  user-select: none;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+  transition: all 0.2s;
+
+  &:hover {
+    box-shadow: 0 6px 16px 0 rgb(0 0 0 / 15%);
+    border-color: transparent;
+    cursor: grab;
+  }
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.iconImg {
+  width: 100%;
+}
+
+.iconBox {
+  width: 60%;
+  height: 60%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconText {
+  font-size: 18px;
+  font-weight: bolder;
+  color: $textColor;
+}

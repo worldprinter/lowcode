@@ -1,0 +1,18 @@
+@import '../../../../assets/styles/mixin.scss';
+
+.switchBtn {
+  color: $fontColor;
+  font-size: 12px;
+  padding: 0 5px 0 10px;
+}
+
+.shapeFieldBox,
+.collapseHeader {
+  color: $fontColor;
+  display: flex;
+  font-size: 12px;
+}
+
+.collapseHeader {
+  align-items: center;
+}

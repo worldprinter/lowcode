@@ -1,0 +1,12 @@
+@import 'assets/styles/mixin.scss';
+
+.engineContainer {
+  color: $fontColor;
+  font-size: $fontSize;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  * {
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,34 @@
+import type { SwitchProps } from 'antd'
+import { ConfigProvider, Switch } from 'antd'
+import React from 'react'
+
+import type { CSetter, CSetterProps } from '../type'
+
+type BooleanSetterProps = SwitchProps
+
+export const BooleanSetter: CSetter<BooleanSetterProps> = ({
+    onValueChange,
+    setterContext,
+    ...props
+}: CSetterProps<BooleanSetterProps>) => {
+    return (
+        <ConfigProvider
+            theme={{
+                token: {
+                    borderRadius: 4,
+                },
+            }}
+        >
+            <Switch
+                {...props}
+                checked={props.value as boolean}
+                onChange={(open, e) => {
+                    props.onChange?.(open, e)
+                    onValueChange?.(open)
+                }}
+            />
+        </ConfigProvider>
+    )
+}
+
+BooleanSetter.setterName = 'Bool 设置器'

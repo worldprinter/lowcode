@@ -1,0 +1,161 @@
+@import '../../assets/styles/mixin.scss';
+
+.workbenchContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .topToolBarBox {
+    height: 64px;
+    width: 100%;
+    border-bottom: 1px solid $borderColor;
+    display: flex;
+
+    .topToolBarView {
+      flex: 1;
+    }
+  }
+
+  .bodyContent {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    overflow: hidden;
+
+    .leftBox {
+      position: relative;
+      display: flex;
+      background-color: #fff;
+      z-index: 100;
+      .pluginIconBar {
+        width: 50px;
+        height: 100%;
+        border-right: 1px solid $borderColor;
+
+        .pluginIconItem {
+          position: relative;
+          cursor: pointer;
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.1s;
+
+          &.active ::before,
+          &:hover ::before {
+            transition: all 0.1s;
+            display: block;
+            content: '';
+            width: 2px;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+
+          &.active ::before {
+            border-left: 4px solid $baseColor !important;
+          }
+
+          &:hover ::before {
+            border-left: 4px solid $hoverColor;
+          }
+        }
+      }
+
+      .pluginPanelBoxResizeBox {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        z-index: 100;
+        border-right: 1px solid $borderColor;
+
+        .pluginHeader {
+          display: flex;
+          color: $fontColor;
+          height: 30px;
+          margin: 10px;
+          overflow: hidden;
+          align-items: center;
+          .pluginNameText {
+            font-size: 16px;
+            font-weight: 700;
+            margin-right: auto;
+            flex-wrap: nowrap;
+            word-break: keep-all;
+          }
+          .closeBtn,
+          .fixedBtn {
+            color: $fontColor;
+          }
+
+          .fixedBtn {
+            > * {
+              transition: all 0.1s;
+            }
+            > .active {
+              transform: rotate(-45deg);
+            }
+          }
+        }
+      }
+      .pluginPanelBox {
+        width: 100%;
+        flex: 1;
+        background-color: ghostwhite;
+        overflow: hidden;
+      }
+    }
+
+    .rightResizeBox {
+      position: relative;
+      .arrowCursor {
+        cursor: pointer;
+        position: absolute;
+        left: -18px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        background-color: #fff;
+        padding: 10px 3px;
+        border-radius: 4px 0 0 4px;
+        font-size: 12px;
+        > .active {
+          transform: rotate(-180deg);
+        }
+      }
+      .rightBox {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-left: 1px $borderColor solid;
+      }
+    }
+
+    .centerBox {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+      .subTopToolbarBox {
+        width: 100%;
+        height: 50px;
+        background-color: #fff;
+      }
+      .canvasBox {
+        width: 100%;
+        flex: 1;
+        overflow: hidden;
+        padding: 20px 30px;
+        background-color: $baseBackgroundColor;
+        .scrollBox {
+          width: 100%;
+          height: 100%;
+          box-shadow: 0 1px 4px 0 rgb(31 50 88 / 13%);
+        }
+      }
+    }
+  }
+}

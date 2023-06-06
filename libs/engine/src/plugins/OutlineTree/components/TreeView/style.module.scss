@@ -1,0 +1,96 @@
+@import '../../../../assets/styles/mixin.scss';
+
+.contentBox {
+  background-color: white;
+  height: 100%;
+  border-top: 1px solid $borderColor;
+  overflow: auto;
+  position: relative;
+  * {
+    transition: all 0.1s;
+  }
+}
+.nodeBox {
+  user-select: none;
+  cursor: pointer;
+  .toolbarBox {
+    display: none;
+    padding-right: 10px;
+  }
+  .iconItem {
+    margin-right: 8px;
+  }
+}
+
+.nodeContent:hover {
+  .toolbarBox {
+    display: flex;
+  }
+}
+
+.nodeContent {
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  &.selected {
+    background-color: rgba(221, 221, 221, 0.232);
+  }
+  .nodeArrow {
+    font-size: 12px;
+
+    &.expanded {
+      transform-origin: center;
+      transform: rotate(90deg);
+    }
+  }
+
+  .nodeRenderView {
+    padding: 5px 0;
+    flex: 1;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.nodeChildren {
+  position: relative;
+
+  &::before {
+    display: block;
+    position: absolute;
+    left: 13px;
+    top: 0;
+    content: '';
+    height: 100%;
+    width: 1px;
+    background-color: $borderColor;
+  }
+
+  &.selected::before {
+    background-color: rgba(0, 0, 255, 0.359);
+  }
+}
+
+.dropAnchorLine {
+  width: 100px;
+  height: 2px;
+  background-color: #1890ff;
+  position: fixed;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.arrowSpan {
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    right: 0;
+    bottom: -0;
+    left: -8px;
+  }
+}
