@@ -143,10 +143,10 @@ const AdapterMethodList = [
     'clear',
 ] as const
 
-type CustomAdvanceAdapterMethodListType = typeof CustomAdvanceAdapter[number]
+type CustomAdvanceAdapterMethodListType = (typeof CustomAdvanceAdapter)[number]
 
 // 必须实现的方法
-type AdapterMethodListType = typeof AdapterMethodList[number]
+type AdapterMethodListType = (typeof AdapterMethodList)[number]
 
 export const getAdapter = (defineAdapter: Partial<AdapterType>): AdapterType => {
     const adapter: AdapterType = [...AdapterMethodList, ...CustomAdvanceAdapter].reduce<
