@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import { useInViewport, useSize } from 'ahooks'
+import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import type { RenderInstance } from '@worldprinter/lowcode-render'
@@ -8,6 +9,7 @@ import { animationFrame, isDOM } from '../../utils'
 
 export type HighlightCanvasRefType = {
     update: () => void
+    container: () => HTMLDivElement | null
 }
 
 export type HighlightBoxPropsType = {
@@ -46,6 +48,7 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
     const { classes } = useStyles()
     const [styleObj, setStyleObj] = useState<Record<string, string>>({})
     const [rect, setRect] = useState<DOMRect>()
+    const [toolBoxRect, setToolBoxRect] = useState<DOMRect>()
     const ref = useRef<HighlightCanvasRefType>(null)
 
     const toolBoxRef = useRef<HTMLDivElement>(null)
@@ -127,6 +130,8 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
             toolBoxDom.style.height = tempRect?.height + 'px'
         }
         setStyleObj(tempObj)
+
+        setToolBoxRect(toolBoxRef.current?.getBoundingClientRect())
     }, [])
 
     useEffect(() => {
@@ -138,9 +143,20 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
         },
     }
 
+    const [, toolboxShowRatio] = useInViewport(toolBoxRef, {
+        root: toolBoxRef.current?.parentElement?.parentElement,
+    })
+
+    const boxTop = useMemo(() => {
+        return (toolboxShowRatio || 1) < 0.5
+            ? `calc( ${rect?.height || 0}px + ${toolBoxRect?.height || 0}px - 1px )`
+            : '0px'
+    }, [toolboxShowRatio, rect?.height, toolBoxRect?.height])
+
     if (!targetDom || !instance) {
         return <></>
     }
+
     return (
         <div
             className={classes.highlightBox}
@@ -155,6 +171,9 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
                 <div
                     ref={toolBoxRef}
                     className={classes.toolBox}
+                    style={{
+                        top: boxTop,
+                    }}
                 >
                     {toolRender}
                 </div>
@@ -175,7 +194,8 @@ export const HighlightCanvasCore = (
     },
     ref: React.Ref<HighlightCanvasRefType>,
 ) => {
-    const { classes } = useStyles()
+    const containerRef = useRef<HTMLDivElement>(null)
+    const { classes, cx } = useStyles()
     const allBoxRef = useRef<React.RefObject<HighlightCanvasRefType>[]>([])
     useImperativeHandle(
         ref,
@@ -187,6 +207,9 @@ export const HighlightCanvasCore = (
                         el.current?.update()
                     })
                 },
+                container() {
+                    return containerRef.current
+                },
             }
         },
         [],
@@ -197,7 +220,10 @@ export const HighlightCanvasCore = (
     }
 
     return (
-        <div className={classes.borderDrawBox}>
+        <div
+            className={cx(classes.borderDrawBox, 'border-draw-box')}
+            ref={containerRef}
+        >
             {instances.map((el) => {
                 if (!el || el._STATUS === 'DESTROY') {
                     return null
