@@ -7,10 +7,11 @@ import type { CNodeDataType } from '../../../types/node'
 import { CNodeDataStructDescribe } from '../../../types/node'
 import { clearSchema, getNode, getRandomStr } from '../../../util'
 import { checkComplexData } from '../../../util/dataCheck'
-import { DataModelEmitter } from '../../../util/modelEmitter'
 import type { DataModelEventType } from '../../../util/modelEmitter'
+import { DataModelEmitter } from '../../../util/modelEmitter'
 import { CProp } from './prop'
 import type { CSlot } from './slot'
+
 
 export const checkNode = (data: any) => {
     if (typeof data === 'string') {
@@ -103,13 +104,13 @@ type ParentType = CNode | CRootNode | CSlot | null
 
 export class CNode {
     nodeType = 'NODE'
-    private rawData: CNodeDataType
-    private data: CNodeModelDataType
     emitter = DataModelEmitter
     parent: ParentType
     materialsModel: CMaterials
     listenerHandle: (() => void)[]
     onChangeCbQueue: OnNodeChangeType[]
+    private rawData: CNodeDataType
+    private data: CNodeModelDataType
 
     constructor(data: CNodeDataType, options?: { parent?: ParentType; materials: CMaterials | null }) {
         this.rawData = JSON.parse(JSON.stringify(data))
@@ -121,6 +122,23 @@ export class CNode {
         this.listenerHandle = []
         this.onChangeCbQueue = []
         this.registerListener()
+    }
+
+    get id() {
+        return this.data.id
+    }
+
+    get value(): CNodeModelDataType {
+        return this.data
+    }
+
+    get props() {
+        return this.data.props
+    }
+
+    get material() {
+        const materialModel = this.materialsModel
+        return materialModel?.findByComponentName(this.data.componentName)
     }
 
     registerListener() {
@@ -145,14 +163,6 @@ export class CNode {
 
     destroy() {
         this.listenerHandle.forEach((it) => it())
-    }
-
-    get id() {
-        return this.data.id
-    }
-
-    get value(): CNodeModelDataType {
-        return this.data
     }
 
     clone(id?: string) {
@@ -183,15 +193,6 @@ export class CNode {
     contains(nodeId: string) {
         const res = getNode(this, nodeId)
         return res
-    }
-
-    get props() {
-        return this.data.props
-    }
-
-    get material() {
-        const materialModel = this.materialsModel
-        return materialModel?.findByComponentName(this.data.componentName)
     }
 
     getPlainProps() {

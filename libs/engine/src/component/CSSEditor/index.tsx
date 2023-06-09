@@ -4,14 +4,14 @@ import CheckableTag from 'antd/es/tag/CheckableTag'
 import type { MutableRefObject } from 'react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
+import { createStyles } from '@worldprinter/wdesign-core'
+
 import { waitReactUpdate } from '../../utils'
 import type { StyleArr } from '../../utils/css'
 import { formatCSSProperty, styleArr2Obj } from '../../utils/css'
 import type { CSSPropertiesEditorRef } from '../CSSPropertiesEditor'
 import { CSSPropertiesEditor } from '../CSSPropertiesEditor'
-import styles from './style.module.scss'
 
-// state: 'normal' | 'hover' | 'active' | 'focus' | 'first' | 'last' | 'even' | 'odd';
 
 const DOM_CSS_STATUS = [
     'normal' as const,
@@ -24,7 +24,7 @@ const DOM_CSS_STATUS = [
     'active' as const,
 ]
 
-type DomCSSStatusType = typeof DOM_CSS_STATUS[number]
+type DomCSSStatusType = (typeof DOM_CSS_STATUS)[number]
 
 const DOM_CSS_STATUS_LIST = DOM_CSS_STATUS.map((el) => {
     return {
@@ -60,7 +60,29 @@ export type CSSEditorProps = {
     handler?: MutableRefObject<CSSEditorRef | null>
 }
 
+const useStyles = createStyles(() => ({
+    stateTag: {
+        position: 'relative',
+        stateTagClose: {
+            position: 'absolute',
+            right: '-10px',
+            top: '-10px',
+            backgroundColor: 'white',
+            color: '#4d4d4d',
+            opacity: 0,
+            fontSize: '20px',
+            transform: 'scale(0.6)',
+            WebkitFontSmoothing: 'antialiased',
+            MozOsxFontSmoothing: 'grayscale',
+            overflow: 'hidden',
+            borderRadius: '10px',
+        },
+        '&:hover': { stateTagClose: { opacity: 1 } },
+    },
+}))
+
 export const CSSEditor = (props: CSSEditorProps) => {
+    const { classes } = useStyles()
     const [selectedStateTag, setSelectedStateTag] = useState<DomCSSStatusType>('normal')
     const [mediaQueryList] = useState<MediaQueryItem[]>([
         {
@@ -193,12 +215,12 @@ export const CSSEditor = (props: CSSEditorProps) => {
                             }}
                             checked={checked}
                             onChange={() => handleChange(tag.key)}
-                            className={styles.stateTag}
+                            className={classes.stateTag}
                         >
                             {tag.label}
                             {tag.key !== 'normal' && (
                                 <MinusCircleOutlined
-                                    className={styles.stateTagClose}
+                                    className={'stateTagClose'}
                                     onClick={(e) => {
                                         e.stopPropagation()
                                         e.preventDefault()

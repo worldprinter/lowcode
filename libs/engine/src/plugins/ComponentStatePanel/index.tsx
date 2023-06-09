@@ -7,6 +7,7 @@ import { MonacoEditor } from '../../component/MonacoEditor'
 import type { CPluginCtx } from '../../core/pluginManager'
 import type { CRightPanelItem } from '../RightPanel/view'
 
+
 export type ComponentStatePanelProps = {
     node: CNode | CRootNode
     pluginCtx: CPluginCtx

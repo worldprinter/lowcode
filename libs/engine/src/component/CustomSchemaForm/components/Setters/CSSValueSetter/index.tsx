@@ -1,8 +1,8 @@
 import { useDebounceFn } from 'ahooks'
-import { AutoComplete, ConfigProvider, Input, InputProps } from 'antd'
+import { AutoComplete, ConfigProvider } from 'antd'
 import clsx from 'clsx'
 import type { BaseSelectRef } from 'rc-select'
-import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import type { CSSPropertiesKey } from '../../../../CSSPropertiesEditor/cssProperties'
 import { CSSProperties } from '../../../../CSSPropertiesEditor/cssProperties'
@@ -77,4 +77,4 @@ export const CSSValueSetter: CSetter<CSSValueSetterProps> = ({
     )
 }
 
-CSSValueSetter.setterName = 'CSS值设置器'
+CSSValueSetter.setterName = 'CSS 值设置器'

@@ -1,4 +1,4 @@
-import { cloneDeep, get, isPlainObject, omit, unionBy } from 'lodash-es'
+import { cloneDeep, isPlainObject, omit, unionBy } from 'lodash-es'
 
 import type { ExportType } from '../const'
 import { ExportTypeEnum } from '../const'
@@ -9,13 +9,14 @@ import type { CNodeDataType } from '../types/node'
 import type { ComponentMetaType, CPageDataType } from '../types/page'
 import { CPageDataTypeDescribe } from '../types/page'
 import { InnerComponentNameEnum } from '../types/rootNode'
-import { clearSchema, findNode, getNode, getRandomStr } from '../util'
+import { clearSchema, getNode, getRandomStr } from '../util'
 import { checkComplexData } from '../util/dataCheck'
 import { DataModelEmitter } from '../util/modelEmitter'
 import { CRootNode } from './RootNode'
 import { CNode } from './RootNode/Node'
 import { CProp } from './RootNode/Node/prop'
-import { CSlot } from './RootNode/Node/slot'
+import { CSlot } from './RootNode/Node/slot';
+
 
 export const checkPage = (data: any): CPageDataType => {
     checkComplexData({
@@ -72,6 +73,10 @@ export class CPage {
         this.assetPackagesList = [...(options?.assetPackagesList || []), ...(this.data.assets || [])]
     }
 
+    get value() {
+        return this.data
+    }
+
     updatePage(data: CPageDataType) {
         const oldData = this.data
         this.rawData = JSON.parse(JSON.stringify(data))
@@ -92,10 +97,6 @@ export class CPage {
             preValue: oldData,
             node: this,
         })
-    }
-
-    get value() {
-        return this.data
     }
 
     // moveNode(from, to, pos) {}

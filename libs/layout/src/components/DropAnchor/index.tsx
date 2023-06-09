@@ -1,12 +1,11 @@
-import clsx from 'clsx'
 import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import type { RenderInstance } from '@worldprinter/lowcode-render'
+import { Box, createStyles } from '@worldprinter/wdesign-core'
 
 import type { DragAndDropEventType } from '../../core/dragAndDrop'
 import { animationFrame, isDOM } from '../../utils'
-import styles from './style.module.scss'
 import type { DropPosType } from './util'
 
 export type HighlightCanvasRefType = {
@@ -24,6 +23,41 @@ export type DropAnchorPropsType = {
     dropInfo: DropPosType
 }
 
+const useStyles = createStyles(() => ({
+    highlightBox: {
+        position: 'absolute',
+        willChange: 'transform, width, height, left, right',
+    },
+    borderDrawBox: {
+        position: 'absolute',
+        left: '0',
+        top: '0',
+        height: '100%',
+        width: '100%',
+        zIndex: 99,
+        pointerEvents: 'none',
+    },
+    toolBox: {
+        position: 'absolute',
+        right: '0',
+        top: '-20px',
+        border: '1px solid black',
+        boxSizing: 'border-box',
+    },
+    horizontal: {
+        '&.before': { borderLeft: '2px solid #1890ff' },
+        '&.after': { borderRight: '2px solid #1890ff' },
+    },
+    vertical: {
+        '&.before': { borderTop: '2px solid #1890ff' },
+        '&.after': { borderBottom: '2px solid #1890ff' },
+    },
+    current: {
+        border: 'none !important',
+        backgroundColor: 'rgba($color: #0084ff, $alpha: 0.42)',
+    },
+}))
+
 export const DropAnchor = ({
     instance,
     toolRender,
@@ -34,6 +68,7 @@ export const DropAnchor = ({
     onDropInfoChange,
     dropInfo,
 }: DropAnchorPropsType) => {
+    const { classes, cx } = useStyles()
     const [styleObj, setStyleObj] = useState<Record<string, string>>({})
     const [posClassName, setPosClassName] = useState<string[]>([])
     const [rect, setRect] = useState<DOMRect>()
@@ -135,11 +170,11 @@ export const DropAnchor = ({
         }
 
         const classNameMap = {
-            horizontal: styles.horizontal,
-            vertical: styles.vertical,
-            before: styles.before,
-            after: styles.after,
-            current: styles.current,
+            horizontal: classes.horizontal,
+            vertical: classes.vertical,
+            before: 'before',
+            after: 'after',
+            current: classes.current,
         }
         const classList = [classNameMap[dropInfo.direction], classNameMap[dropInfo.pos]]
         setPosClassName(classList)
@@ -156,7 +191,6 @@ export const DropAnchor = ({
     useEffect(() => {
         updatePos()
     }, [instance, mouseEvent])
-
     ;(ref as any).current = {
         update() {
             updatePos()
@@ -168,7 +202,7 @@ export const DropAnchor = ({
     }
     return (
         <div
-            className={clsx([styles.highlightBox, ...posClassName])}
+            className={cx([classes.highlightBox, ...posClassName])}
             id={instance?._UNIQUE_ID}
             style={{
                 ...style,
@@ -177,16 +211,16 @@ export const DropAnchor = ({
             }}
         >
             {toolRender && (
-                <div
+                <Box
                     ref={toolBoxRef}
-                    className={styles.toolBox}
+                    className={cx(classes.toolBox)}
                     style={{
                         top: `-${toolBoxSize.height + 5}px`,
                         opacity: toolBoxSize.width ? 1 : 0,
                     }}
                 >
                     {toolRender}
-                </div>
+                </Box>
             )}
         </div>
     )
@@ -198,7 +232,6 @@ export const DropAnchorCanvasCore = (
         toolRender,
         style,
         mouseEvent,
-        onDropInfoChange,
         dropInfos,
     }: {
         instances: RenderInstance[]
@@ -210,6 +243,7 @@ export const DropAnchorCanvasCore = (
     },
     ref: React.Ref<HighlightCanvasRefType>,
 ) => {
+    const { cx, classes } = useStyles()
     const [_, updateRender] = useState(0)
     const allBoxRef = useRef<React.RefObject<HighlightCanvasRefType>[]>([])
     useImperativeHandle(
@@ -233,7 +267,7 @@ export const DropAnchorCanvasCore = (
     }
 
     return (
-        <div className={styles.borderDrawBox}>
+        <Box className={cx(`border-draw-box`, classes.borderDrawBox)}>
             {instances.map((el, index) => {
                 if (!el) {
                     return null
@@ -255,7 +289,7 @@ export const DropAnchorCanvasCore = (
                     />
                 )
             })}
-        </div>
+        </Box>
     )
 }
 

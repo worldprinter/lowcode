@@ -8,6 +8,7 @@ import type { CPlugin, CPluginCtx } from '../../core/pluginManager'
 import localize from './localize'
 import styles from './style.module.scss'
 
+
 export const PLUGIN_NAME = 'GlobalState'
 const i18nNamespace = `plugin:${PLUGIN_NAME}`
 

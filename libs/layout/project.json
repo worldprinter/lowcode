@@ -19,13 +19,14 @@
                 "tsConfig": "libs/layout/tsconfig.lib.json",
                 "project": "libs/layout/package.json",
                 "entryFile": "libs/layout/src/index.ts",
-                "external": ["react", "react-dom", "react/jsx-runtime"],
+                "external": "all",
                 "rollupConfig": "@nx/react/plugins/bundle-rollup",
                 "compiler": "tsc",
                 "format": ["esm", "cjs"],
                 "buildableProjectDepsInPackageJsonType": "dependencies",
                 "updateBuildableProjectDepsInPackageJson": true,
                 "generateExportsField": true,
+                "extractCss": true,
                 "assets": [
                     {
                         "glob": "libs/layout/README.md",

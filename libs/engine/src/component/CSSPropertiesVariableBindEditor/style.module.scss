@@ -1,13 +1,14 @@
-@import '../../assets/styles/mixin.scss';
 
 .cssFieldBox {
   display: flex;
-  color: $textColor !important;
+  color: rgb(104, 104, 104) !important;
+
   :global {
     .ant-select-selector input {
-      color: $textColor !important;
+      color: rgb(104, 104, 104) !important;
     }
   }
+
   .row {
     display: flex;
     padding-bottom: 6px;
@@ -28,6 +29,7 @@
   .rightBox {
     padding-left: 10px;
   }
+
   .inputBox {
     flex: 1;
   }
@@ -35,6 +37,7 @@
 
 .cssBox {
   overflow-x: hidden;
+
   :global {
     .ant-collapse-borderless > .ant-collapse-item {
       border-bottom: 1px solid #e4e4e4;
@@ -43,6 +46,7 @@
     .ant-collapse-borderless > .ant-collapse-item:last-child {
       border-bottom: none;
     }
+
     .ant-collapse-content-box {
       padding-bottom: 30px !important;
     }

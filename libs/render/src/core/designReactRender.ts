@@ -241,7 +241,7 @@ export class DesignRender extends React.Component<DesignRenderProp> {
         return React.createElement(Render, {
             onGetComponent,
             ...renderProps,
-            // 拦截特殊属性配置, 配合开发模式使用
+            // 拦截特殊属性配置，配合开发模式使用
             processNodeConfigHook: (config, node) => {
                 if (node.nodeType !== 'NODE') {
                     return config

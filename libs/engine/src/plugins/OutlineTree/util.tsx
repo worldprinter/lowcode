@@ -13,12 +13,9 @@ import type {
     RenderPropType,
     SetterObjType,
     SetterType,
-    ShapeSetterObjType} from '@worldprinter/lowcode-model';
-import {
-    getMTitle,
-    isJSSlotPropNode,
-    isSpecialMaterialPropType
+    ShapeSetterObjType,
 } from '@worldprinter/lowcode-model'
+import { getMTitle, isJSSlotPropNode, isSpecialMaterialPropType } from '@worldprinter/lowcode-model'
 
 import type { TreeNodeData } from './components/TreeView/dataStruct'
 

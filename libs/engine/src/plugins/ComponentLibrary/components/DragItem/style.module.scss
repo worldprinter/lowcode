@@ -1,14 +1,15 @@
-@import '../../../../assets/styles/mixin.scss';
 
 .square {
   user-select: none;
   position: relative;
   flex: 33.3% 0;
+
   &::before {
     content: '';
     padding-top: 100%;
     float: left;
   }
+
   &::after {
     content: '';
     display: block;
@@ -26,8 +27,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-right: 1px solid $borderColor;
-  border-bottom: 1px solid $borderColor;
+  border-right: 1px solid rgb(233 233 233);
+  border-bottom: 1px solid rgb(233 233 233);
   transition: all 0.2s;
 
   &:hover {
@@ -35,6 +36,7 @@
     border-color: transparent;
     cursor: grab;
   }
+
   &:active {
     cursor: grabbing;
   }
@@ -56,5 +58,5 @@
 .iconText {
   font-size: 18px;
   font-weight: bolder;
-  color: $textColor;
+  color: rgb(104, 104, 104);
 }

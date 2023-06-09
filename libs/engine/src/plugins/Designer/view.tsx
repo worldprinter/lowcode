@@ -17,6 +17,7 @@ import localize from './localize'
 import styles from './style.module.scss'
 import { getClosestNodeList } from './util'
 
+
 export type DesignerPropsType = {
     pluginCtx: CPluginCtx
 }
@@ -304,7 +305,7 @@ export class Designer extends React.Component<DesignerPropsType, DesignerStateTy
         const { layoutRef, props, onSelectNode, onDragStart, onHoverNode, onNodeDrop, onNodeDragging } = this
         const { pageModel, hoverToolBar, selectToolBar, ghostView, assets, portalView } = this.state
         const { pluginCtx } = props
-        // const renderJSUrl = pluginCtx.engine.props.renderJSUrl || './render.umd.js'
+
         const renderJSUrl = pluginCtx.engine.props.renderJSUrl
         return (
             <>

@@ -1,30 +1,18 @@
+;
 /* eslint-disable @typescript-eslint/ban-types */
-import { isPlainObject } from 'lodash-es'
-import type React from 'react'
-import {
-    any,
-    array,
-    assign,
-    boolean,
-    dynamic,
-    enums,
-    func,
-    literal,
-    number,
-    object,
-    omit,
-    optional,
-    record,
-    string,
-    union,
-} from 'superstruct'
+import { isPlainObject } from 'lodash-es';
+import type React from 'react';
+import { any, array, assign, boolean, dynamic, enums, func, literal, number, object, omit, optional, record, string, union } from 'superstruct';
 
-import type { CRootNode } from '../Page/RootNode'
-import type { CNode } from '../Page/RootNode/Node'
-import type { ComplexSetterTypeEnum, LibMetaType, SetterBasicType, SetterTypeEnum } from './base'
-import { LibMetaTypeDescribe } from './base'
-import type { CNodeDataType } from './node'
-import { CNodeDataStructDescribe } from './node'
+
+
+import type { CRootNode } from '../Page/RootNode';
+import type { CNode } from '../Page/RootNode/Node';
+import type { ComplexSetterTypeEnum, LibMetaType, SetterBasicType, SetterTypeEnum } from './base';
+import { LibMetaTypeDescribe } from './base';
+import type { CNodeDataType } from './node';
+import { CNodeDataStructDescribe } from './node';
+
 
 export enum BaseDataType {
     STRING = 'string',

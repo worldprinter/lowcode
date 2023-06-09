@@ -1,22 +1,25 @@
-@import '../../../../assets/styles/mixin.scss';
 
 .contentBox {
   background-color: white;
   height: 100%;
-  border-top: 1px solid $borderColor;
+  border-top: 1px solid rgb(233 233 233);
   overflow: auto;
   position: relative;
+
   * {
     transition: all 0.1s;
   }
 }
+
 .nodeBox {
   user-select: none;
   cursor: pointer;
+
   .toolbarBox {
     display: none;
     padding-right: 10px;
   }
+
   .iconItem {
     margin-right: 8px;
   }
@@ -33,9 +36,11 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+
   &.selected {
     background-color: rgba(221, 221, 221, 0.232);
   }
+
   .nodeArrow {
     font-size: 12px;
 
@@ -66,7 +71,7 @@
     content: '';
     height: 100%;
     width: 1px;
-    background-color: $borderColor;
+    background-color: rgb(233 233 233);
   }
 
   &.selected::before {
@@ -85,6 +90,7 @@
 
 .arrowSpan {
   position: relative;
+
   &::after {
     content: '';
     position: absolute;

@@ -1,11 +1,17 @@
+;
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React from 'react'
+import React from 'react';
 
-import type { Sensor } from '@worldprinter/lowcode-layout'
-import type { CPage } from '@worldprinter/lowcode-model'
 
-import type { DesignerExports } from '../../../Designer'
-import type { TreeNodeData } from './dataStruct'
+
+import type { Sensor } from '@worldprinter/lowcode-layout';
+import type { CPage } from '@worldprinter/lowcode-model';
+
+
+
+import type { DesignerExports } from '../../../Designer';
+import type { TreeNodeData } from './dataStruct';
+
 
 export enum DragState {
     DRAGGING = 'DRAGGING',

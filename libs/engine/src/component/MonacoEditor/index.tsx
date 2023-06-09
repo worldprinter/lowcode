@@ -1,71 +1,92 @@
-import * as monaco from 'monaco-editor'
+import Editor from '@monaco-editor/react'
+import { useUnmount } from 'ahooks'
+import type * as monaco from 'monaco-editor'
+import type { editor } from 'monaco-editor'
 import type * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api'
-import { useEffect, useRef } from 'react'
+import React from 'react'
 
+
+
+
+
+export type Monaco = typeof monaco
 export type MonacoEditorInstance = monacoEditor.editor.IStandaloneCodeEditor
 
 export type MonacoEditorProps = {
     beforeMount?: (monaco: typeof monacoEditor) => void
     onDidMount?: (editor: MonacoEditorInstance) => void
-    options?: monaco.editor.IStandaloneEditorConstructionOptions
-    override?: monaco.editor.IEditorOverrideServices
     onChange?: (val: string, e: monaco.editor.IModelContentChangedEvent) => void
     onDidChangeMarkers?: (markers: monaco.editor.IMarker[]) => void
+    options?: monaco.editor.IStandaloneEditorConstructionOptions
+    override?: monaco.editor.IEditorOverrideServices
     initialValue?: string
     language?: 'json' | 'javascript' | 'typescript'
 }
 
 export const MonacoEditor = (props: MonacoEditorProps) => {
-    const editorDomRef = useRef<HTMLDivElement>(null)
-    const onChangeRef = useRef<MonacoEditorProps['onChange'] | undefined>()
-    onChangeRef.current = props.onChange
-    const onDidChangeMarkersRef = useRef<MonacoEditorProps['onDidChangeMarkers'] | undefined>()
-    onDidChangeMarkersRef.current = props.onDidChangeMarkers
-    const editorInstance = useRef<MonacoEditorInstance | null>(null)
+    const monacoRef = React.useRef<Monaco | null>(null)
+    const editorRef = React.useRef<MonacoEditorInstance | null>(null)
+    const subscriptionRef = React.useRef<monaco.IDisposable | null>(null)
 
-    useEffect(() => {
-        if (!editorDomRef.current) {
-            return
-        }
-        props.beforeMount?.(monaco)
-        const editor = monaco.editor.create(
-            editorDomRef.current,
-            {
-                ...(props.options || {}),
-                value: props.initialValue || props.options?.value,
-                language: props.language || props.options?.language,
-            },
-            { ...(props.override || {}) },
-        )
+    const defaultValue = React.useMemo(() => {
+        return props.initialValue || props.options?.value
+    }, [props.initialValue, props.options?.value])
+    const language = React.useMemo(() => {
+        return props.language || props.options?.language
+    }, [props.language, props.options?.language])
+    const options = React.useMemo(() => {
+        return props.options
+    }, [props.options])
+    const override = React.useMemo(() => {
+        return props.override
+    }, [props.override])
 
-        editorInstance.current = editor
-        props.onDidMount?.(editor)
-        const subscription = editor?.onDidChangeModelContent((event) => {
-            if (!event.isFlush) {
-                onChangeRef.current?.(editor.getValue(), event)
-            }
-        })
+    const onBeforeMount = React.useCallback(
+        (monaco: Monaco) => {
+            monacoRef.current = monaco
+            props.beforeMount?.(monaco)
+        },
+        [props],
+    )
+    const onChange = React.useCallback(
+        (value: string | undefined, ev: editor.IModelContentChangedEvent) => {
+            props.onChange?.(value || '', ev)
+        },
+        [props],
+    )
 
-        monaco.editor.onDidChangeMarkers((uris) => {
-            const editorModel = editor.getModel()
-            if (!editorModel) {
-                return
-            }
-            const editorUri = editorModel.uri
-            const changeUri = uris.find((el) => el.path === editorUri.path)
-            if (changeUri) {
-                const res = monaco.editor.getModelMarkers({
-                    resource: editorUri,
-                })
-                onDidChangeMarkersRef.current?.(res)
-            }
-        })
+    useUnmount(() => {
+        editorRef.current?.dispose()
+        subscriptionRef.current?.dispose()
+    })
 
-        ;() => {
-            editor.dispose()
-            subscription?.dispose()
-        }
-    }, [])
+    const onMount = React.useCallback(
+        (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
+            editorRef.current = editor
+            props.onDidMount?.(editor)
+            subscriptionRef.current = editor?.onDidChangeModelContent((event) => {
+                if (!event.isFlush) {
+                    onChange(editor.getValue(), event)
+                }
+            })
+
+            monaco.editor.onDidChangeMarkers((uris) => {
+                const editorModel = editor.getModel()
+                if (!editorModel) {
+                    return
+                }
+                const editorUri = editorModel.uri
+                const changeUri = uris.find((el) => el.path === editorUri.path)
+                if (changeUri) {
+                    const res = monaco.editor.getModelMarkers({
+                        resource: editorUri,
+                    })
+                    props.onDidChangeMarkers?.(res)
+                }
+            })
+        },
+        [onChange, props],
+    )
 
     return (
         <div
@@ -73,7 +94,16 @@ export const MonacoEditor = (props: MonacoEditorProps) => {
                 width: '100%',
                 height: '100%',
             }}
-            ref={editorDomRef}
-        ></div>
+        >
+            <Editor
+                language={language}
+                defaultValue={defaultValue}
+                options={options}
+                overrideServices={override}
+                beforeMount={onBeforeMount}
+                onMount={onMount}
+                onChange={onChange}
+            />
+        </div>
     )
 }

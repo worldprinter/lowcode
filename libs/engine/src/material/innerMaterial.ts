@@ -3,6 +3,10 @@ import { capitalize } from 'lodash-es'
 import type { CMaterialPropsType, CMaterialType } from '@worldprinter/lowcode-model'
 import { HTMl_TAGS } from '@worldprinter/lowcode-model'
 
+
+
+
+
 const customAttributesMeta: CMaterialPropsType[number] = {
     name: '$$attributes',
     title: '属性',

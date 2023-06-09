@@ -519,7 +519,7 @@ export class DefineReactAdapter {
                 }
 
                 const newContext = that.getContext(tempContext, $$context)
-                // 需要优先处理处理 methods， methods 内部不能调用 methods 上的方法
+                // 需要优先处理处理 methods，methods 内部不能调用 methods 上的方法
                 const methodsObj = that.transformProps(
                     {
                         methods: nodeModel.value.methods,
@@ -718,7 +718,7 @@ export class DefineReactAdapter {
             }
         }
 
-        (DynamicComponent as any).displayName = `${nodeModel.value.componentName}Dynamic`
+        ;(DynamicComponent as any).displayName = `${nodeModel.value.componentName}Dynamic`
 
         return DynamicComponent
     }

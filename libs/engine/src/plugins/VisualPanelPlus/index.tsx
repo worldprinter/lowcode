@@ -16,6 +16,7 @@ import { formatCSSProperty, formatCssToNodeVal, formatNodeValToEditor, styleArr2
 import type { CRightPanelItem } from '../RightPanel/view'
 import styles from './style.module.scss'
 
+
 export const VisualPanelPlus = (props: { node: CNode | CRootNode; pluginCtx: CPluginCtx }) => {
     const formRef = useRef<CSSPropertiesVariableBindEditorRef>(null)
     const node = props.pluginCtx.pageModel.getNode(props.node.id)!

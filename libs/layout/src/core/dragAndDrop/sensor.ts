@@ -31,23 +31,16 @@ export type SensorEventType = {
 export type SensorEventNameType = keyof SensorEventType
 
 export class Sensor extends DEmitter<SensorEventType> {
-    // TODO: 用于处理感应区重叠时，事件触发的优先级, 暂时未实现相关功能
+    // TODO: 用于处理感应区重叠时，事件触发的优先级，暂时未实现相关功能
     eventPriority = 0
+    container: HTMLElement
+    offsetDom?: HTMLElement | null
+    name: string
     private offset: SensorOffsetType = {
         x: 0,
         y: 0,
     }
-
-    container: HTMLElement
-    offsetDom?: HTMLElement | null
-
-    canDrag: (params: SensorEventObjType) => Promise<SensorEventObjType | null | undefined | boolean> = (params) =>
-        Promise.resolve(params)
-    canDrop: (params: SensorEventObjType) => Promise<SensorEventObjType | null | undefined | boolean> = (params) =>
-        Promise.resolve(params)
-
     private eventDisposeQueue: (() => void)[] = []
-    name: string
 
     constructor(options: {
         name: string
@@ -69,6 +62,12 @@ export class Sensor extends DEmitter<SensorEventType> {
         this.registerEvent()
         this.registerSyncOffsetEvent()
     }
+
+    canDrag: (params: SensorEventObjType) => Promise<SensorEventObjType | null | undefined | boolean> = (params) =>
+        Promise.resolve(params)
+
+    canDrop: (params: SensorEventObjType) => Promise<SensorEventObjType | null | undefined | boolean> = (params) =>
+        Promise.resolve(params)
 
     registerSyncOffsetEvent() {
         const container = this.offsetDom

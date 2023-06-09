@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } 
 import ReactDOM from 'react-dom'
 
 import type { RenderInstance } from '@worldprinter/lowcode-render'
+import { createStyles } from '@worldprinter/wdesign-core'
 
 import { animationFrame, isDOM } from '../../utils'
-import styles from './style.module.scss'
 
 export type HighlightCanvasRefType = {
     update: () => void
@@ -18,7 +18,32 @@ export type HighlightBoxPropsType = {
     onRefDestroy?: (ref: React.RefObject<HighlightCanvasRefType>) => void
 }
 
+const useStyles = createStyles(() => ({
+    highlightBox: {
+        position: 'absolute',
+        willChange: 'transform, width, height, left, right',
+        border: '2px solid rgb(44, 115, 253)',
+    },
+    borderDrawBox: {
+        position: 'absolute',
+        left: '0',
+        height: '100%',
+        width: '100%',
+        zIndex: 99,
+        pointerEvents: 'none',
+    },
+    toolBox: {
+        position: 'absolute',
+        width: '100%',
+        left: '0',
+        top: '0',
+        boxSizing: 'border-box',
+        transform: 'translateY(-100%)',
+    },
+}))
+
 export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style }: HighlightBoxPropsType) => {
+    const { classes } = useStyles()
     const [styleObj, setStyleObj] = useState<Record<string, string>>({})
     const [rect, setRect] = useState<DOMRect>()
     const ref = useRef<HighlightCanvasRefType>(null)
@@ -107,7 +132,6 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
     useEffect(() => {
         updatePos()
     }, [instance])
-
     ;(ref as any).current = {
         update() {
             updatePos()
@@ -119,7 +143,7 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
     }
     return (
         <div
-            className={styles.highlightBox}
+            className={classes.highlightBox}
             id={instance?._UNIQUE_ID}
             style={{
                 ...style,
@@ -130,7 +154,7 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
             {toolRender && (
                 <div
                     ref={toolBoxRef}
-                    className={styles.toolBox}
+                    className={classes.toolBox}
                 >
                     {toolRender}
                 </div>
@@ -151,6 +175,7 @@ export const HighlightCanvasCore = (
     },
     ref: React.Ref<HighlightCanvasRefType>,
 ) => {
+    const { classes } = useStyles()
     const allBoxRef = useRef<React.RefObject<HighlightCanvasRefType>[]>([])
     useImperativeHandle(
         ref,
@@ -172,7 +197,7 @@ export const HighlightCanvasCore = (
     }
 
     return (
-        <div className={styles.borderDrawBox}>
+        <div className={classes.borderDrawBox}>
             {instances.map((el) => {
                 if (!el || el._STATUS === 'DESTROY') {
                     return null

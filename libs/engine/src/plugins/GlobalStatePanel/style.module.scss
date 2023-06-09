@@ -1,10 +1,9 @@
-@import '../../assets/styles/mixin.scss';
 
 .box {
   height: 100%;
   width: 100%;
   padding-right: 10px;
-  border-top: 1px solid $borderColor;
+  border-top: 1px solid rgb(233 233 233);
   padding-top: 10px;
   background-color: white;
 }

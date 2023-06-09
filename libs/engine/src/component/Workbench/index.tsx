@@ -10,6 +10,7 @@ import React from 'react'
 import { waitReactUpdate } from '../../utils'
 import styles from './style.module.scss'
 
+
 export type PluginContext = {
     openPanel: () => void
     closePanel: () => void
@@ -266,10 +267,10 @@ export class Workbench extends React.Component<WorkbenchPropsType, WorkbenchStat
                         ref={this.leftPanelContentRef}
                     >
                         <div className={styles.pluginIconBar}>
-                            {leftPanels.map((pl) => {
+                            {leftPanels.map((pl, index) => {
                                 return (
                                     <div
-                                        key={pl.name}
+                                        key={`${pl.name}-${index}`}
                                         onClick={() => onPluginIconClick(pl)}
                                         className={clsx([
                                             styles.pluginIconItem,

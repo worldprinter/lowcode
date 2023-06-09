@@ -27,6 +27,7 @@
                 "updateBuildableProjectDepsInPackageJson": true,
                 "generateExportsField": true,
                 "skipTypeCheck": true,
+                "extractCss": true,
                 "assets": [
                     {
                         "glob": "libs/engine/README.md",

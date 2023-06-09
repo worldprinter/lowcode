@@ -8,6 +8,7 @@ import type { CPluginCtx } from '../../core/pluginManager'
 import type { CRightPanelItem } from '../RightPanel/view'
 import styles from './style.module.scss'
 
+
 export type AdvancePanelProps = {
     node: CNode | CRootNode
     pluginCtx: CPluginCtx

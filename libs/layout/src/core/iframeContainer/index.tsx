@@ -26,7 +26,7 @@ export class IFrameContainer {
     }
 
     getHTMLTemplate() {
-        const template = `
+        return `
     <!doctype html>
     <html class="chameleon-design-mode">
       <head>
@@ -45,7 +45,6 @@ export class IFrameContainer {
         <div id="app"><div>
       </body>
     </html>    `
-        return template
     }
 
     load(containerDom: HTMLElement) {

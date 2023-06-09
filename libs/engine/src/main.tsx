@@ -1,24 +1,17 @@
-import type { Emitter } from 'mitt';
+import type { Emitter } from 'mitt'
 import mitt from 'mitt'
 import React from 'react'
 
-import type {
-    AssetPackage,
-    CMaterialType,
-    CNode,
-    CPageDataType,
-    CRootNode} from '@worldprinter/lowcode-model';
-import {
-    CPage,
-    EmptyPage,
-} from '@worldprinter/lowcode-model'
+import type { AssetPackage, CMaterialType, CNode, CPageDataType, CRootNode } from '@worldprinter/lowcode-model'
+import { CPage, EmptyPage } from '@worldprinter/lowcode-model'
 
 import { Workbench } from './component/Workbench'
-import type { CPlugin} from './core/pluginManager';
+import type { CPlugin } from './core/pluginManager'
 import { PluginManager } from './core/pluginManager'
 import styles from './Engine.module.scss'
 import i18n from './i18n/index'
 import { beforeInitRender, defaultRender } from './utils/defaultEngineConfig'
+
 
 export type EnginContext = {
     pluginManager: PluginManager
@@ -75,7 +68,7 @@ export class Engine extends React.Component<EngineProps> {
     }
 
     async componentDidMount() {
-        (window as any).__C_ENGINE__ = this
+        ;(window as any).__C_ENGINE__ = this
         const plugins = this.props.plugins
         const pluginManager = new PluginManager({
             engine: this,

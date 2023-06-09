@@ -7,6 +7,7 @@ import type { CNode, CNodeModelDataType } from '../Page/RootNode/Node'
 import type { CPropDataType } from '../types/node'
 import type { CPageDataType } from '../types/page'
 
+
 export type DataModelEventType = {
     onPageChange: {
         value: CPageDataType | CPpageDataModelType

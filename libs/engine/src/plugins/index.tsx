@@ -7,6 +7,7 @@ import { HistoryPlugin } from './History'
 import { OutlineTreePlugin } from './OutlineTree'
 import { RightPanelPlugin } from './RightPanel'
 
+
 export const DEFAULT_PLUGIN_LIST: CPlugin[] = [
     DesignerPlugin,
     OutlineTreePlugin,

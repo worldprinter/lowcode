@@ -15,6 +15,7 @@ import type { TreeNodeData } from './dataStruct'
 import styles from './style.module.scss'
 import { DRAG_ITEM_KEY, TreeNode } from './treeNode'
 
+
 type TreeViewProps = {
     pluginCtx: CPluginCtx
     multiSelect?: boolean
@@ -295,6 +296,11 @@ export class TreeView extends React.Component<
             }
             return res
         })
+
+        if (!dnd) {
+            console.warn('请检查是否在 React StrictMode 下使用')
+            return
+        }
 
         dnd.registerSensor(sensor)
 

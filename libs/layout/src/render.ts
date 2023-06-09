@@ -1,3 +1,3 @@
-import * as CRender from '@worldprinter/lowcode-render';
+import * as CRender from '@worldprinter/lowcode-render'
 
-export default CRender;
+export default CRender

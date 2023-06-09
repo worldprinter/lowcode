@@ -44,7 +44,7 @@ export function compWrapper(Comp: any) {
         }
     }
 
-    (WrapperForRef as any).displayName = Comp.displayName
+    ;(WrapperForRef as any).displayName = Comp.displayName
 
     return WrapperForRef as any
 }

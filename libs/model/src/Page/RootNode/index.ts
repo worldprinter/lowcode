@@ -12,7 +12,8 @@ import { isArray, isPlainObject } from '../../util/lodash'
 import type { DataModelEventType } from '../../util/modelEmitter'
 import { DataModelEmitter } from '../../util/modelEmitter'
 import { CNode } from './Node'
-import { CProp } from './Node/prop'
+import { CProp } from './Node/prop';
+
 
 export type CRootNodeModelDataType = Omit<CRootNodeDataType, 'children'> & {
     id: string
@@ -92,14 +93,14 @@ export const parseSchema = (
 type OnNodeChangeType = (params: DataModelEventType['onNodeChange']) => void
 
 export class CRootNode {
-    private rawData: CRootNodeDataType
-    private data: CRootNodeModelDataType
     nodeType = InnerComponentNameEnum.ROOT_CONTAINER
     emitter = DataModelEmitter
     materialsModel: CMaterials
     listenerHandle: (() => void)[]
     onChangeCbQueue: OnNodeChangeType[]
     parent: CPage | null
+    private rawData: CRootNodeDataType
+    private data: CRootNodeModelDataType
 
     constructor(data: any, { parent, materials }: { parent: CPage | null; materials: CMaterials }) {
         this.materialsModel = materials
@@ -109,6 +110,23 @@ export class CRootNode {
         this.onChangeCbQueue = []
         this.registerListener()
         this.parent = parent
+    }
+
+    get id() {
+        return this.data.id
+    }
+
+    get value() {
+        return this.data
+    }
+
+    get props() {
+        return this.data.props
+    }
+
+    get material() {
+        const materialModel = this.materialsModel
+        return materialModel?.findByComponentName(this.data.componentName)
     }
 
     registerListener() {
@@ -129,23 +147,6 @@ export class CRootNode {
         return () => {
             this.onChangeCbQueue = this.onChangeCbQueue.filter((el) => el !== cb)
         }
-    }
-
-    get id() {
-        return this.data.id
-    }
-
-    get value() {
-        return this.data
-    }
-
-    get props() {
-        return this.data.props
-    }
-
-    get material() {
-        const materialModel = this.materialsModel
-        return materialModel?.findByComponentName(this.data.componentName)
     }
 
     updateValue(val?: Partial<CRootNodeModelDataType>) {

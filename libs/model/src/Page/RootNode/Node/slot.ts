@@ -7,6 +7,7 @@ import { isArray, isPlainObject } from '../../../util/lodash'
 import { DataModelEmitter } from '../../../util/modelEmitter'
 import type { CProp } from './prop'
 
+
 export type CJSSlotPropDataType = Omit<RenderPropType, 'value'> & {
     value: CNode[]
 }
@@ -46,12 +47,12 @@ const parseData = (data: any, parent?: ParentType) => {
 
 export class CSlot {
     nodeType = 'SLOT'
-    private rawData: RenderPropType
     parent: CProp | null
     emitter = DataModelEmitter
-    private data: CJSSlotPropDataType
     id: string
     materialsMode: CMaterials
+    private rawData: RenderPropType
+    private data: CJSSlotPropDataType
 
     constructor(data: RenderPropType, options?: { parent: CProp | null; materials: CMaterials }) {
         this.parent = options?.parent || null

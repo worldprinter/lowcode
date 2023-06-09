@@ -1,17 +1,29 @@
-import styled from '@emotion/styled';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import NxWelcome from './nx-welcome';
+import { EditorPage } from './Editor'
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: (
+            <ul>
+                <li>
+                    <a href={'/editor'}>editor</a>
+                </li>
+                <li>
+                    <a href={'/preview'}>preview</a>
+                </li>
+            </ul>
+        ),
+    },
+    {
+        path: '/editor',
+        element: <EditorPage />,
+    },
+])
 
 export function App() {
-  return (
-    <StyledApp>
-      <NxWelcome title="demo" />
-    </StyledApp>
-  );
+    return <RouterProvider router={router} />
 }
 
-export default App;
+export default App

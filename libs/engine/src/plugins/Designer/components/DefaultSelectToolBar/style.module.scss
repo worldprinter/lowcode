@@ -1,4 +1,3 @@
-@import '../../../../assets/styles/mixin.scss';
 
 .toolBarBox {
   display: flex;
@@ -9,7 +8,7 @@
 }
 
 .item {
-  background-color: $baseColor;
+  background-color: #1677ff;
   color: white;
   padding: 2px 3px;
   font-size: 12px;
@@ -40,7 +39,7 @@
     }
 
     .hoverItem {
-      background-color: $baseColor;
+      background-color: #1677ff;
       padding: 2px 3px;
       color: white;
       font-size: 12px;
@@ -48,11 +47,12 @@
       cursor: pointer;
     }
   }
+
   .placeholder {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-color: $baseColor;
+    background-color: #1677ff;
     color: white;
     padding: 2px 5px;
     font-size: 12px;

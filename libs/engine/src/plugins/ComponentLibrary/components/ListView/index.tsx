@@ -6,6 +6,7 @@ import type { SnippetsType } from '@worldprinter/lowcode-model'
 import { DragComponentItem } from '../DragItem'
 import styles from './style.module.scss'
 
+
 const { Panel } = Collapse
 
 export type ListViewProps = {

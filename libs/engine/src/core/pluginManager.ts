@@ -1,12 +1,18 @@
+;
 // import { i18n } from 'i18next';
-import type { Emitter } from 'mitt'
-import mitt from 'mitt'
+import type { Emitter } from 'mitt';
+import mitt from 'mitt';
 
-import type { AssetPackage, CPage } from '@worldprinter/lowcode-model'
 
-import type { Workbench } from '../component/Workbench'
-import type { CustomI18n } from '../i18n'
-import type { Engine } from '../index'
+
+import type { AssetPackage, CPage } from '@worldprinter/lowcode-model';
+
+
+
+import type { Workbench } from '../component/Workbench';
+import type { CustomI18n } from '../i18n';
+import type { Engine } from '../index';
+
 
 export type PluginObj = {
     name: string

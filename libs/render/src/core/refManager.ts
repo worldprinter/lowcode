@@ -1,18 +1,19 @@
 export class RefManager {
-  private refMap = new Map();
+    private refMap = new Map()
 
-  get(id: string) {
-    return this.refMap.get(id);
-  }
-  add(id: string, handle: any) {
-    this.refMap.set(id, handle);
-  }
+    get(id: string) {
+        return this.refMap.get(id)
+    }
 
-  remove(id: string) {
-    this.refMap.delete(id);
-  }
+    add(id: string, handle: any) {
+        this.refMap.set(id, handle)
+    }
 
-  destroy() {
-    this.refMap.clear();
-  }
+    remove(id: string) {
+        this.refMap.delete(id)
+    }
+
+    destroy() {
+        this.refMap.clear()
+    }
 }

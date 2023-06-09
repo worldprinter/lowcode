@@ -17,6 +17,7 @@ import { DataModelEmitter } from '../../../util/modelEmitter'
 import type { CJSSlotPropDataType } from './slot'
 import { CSlot } from './slot'
 
+
 export type CSpecialPropDataType = CJSSlotPropDataType | FunctionPropType | JSExpressionPropType
 
 export type CPropModelDataType = NormalPropType | CSpecialPropDataType | CSpecialPropDataType[]
@@ -77,12 +78,12 @@ const parseData = (data: any, parent: ParentType, materials: CMaterials) => {
 
 export class CProp {
     nodeType = 'PROP'
-    private rawData: CPropDataType
     parent: CNode | CRootNode | null
     emitter = DataModelEmitter
-    private data: CPropModelDataType
     name: string
     materialsMode: CMaterials
+    private rawData: CPropDataType
+    private data: CPropModelDataType
 
     constructor(
         name: string,
@@ -97,6 +98,22 @@ export class CProp {
         this.data = parseData(data, this, materials)
     }
 
+    get value() {
+        return this.data
+    }
+
+    get material() {
+        const parent = this.parent
+        if (parent instanceof CNode) {
+            const parentMaterial = parent.material
+            const allProps = flatProps(parentMaterial?.value.props || [])
+            const target = allProps.find((el) => el.name === this.name)
+            return target
+        } else {
+            return null
+        }
+    }
+
     // TODO:
     isIncludeSlot() {
         return false
@@ -105,10 +122,6 @@ export class CProp {
     // TODO:
     isIncludeExpression() {
         return false
-    }
-
-    get value() {
-        return this.data
     }
 
     updateValue(val?: CPropDataType | CPropModelDataType) {
@@ -126,18 +139,6 @@ export class CProp {
                 preValue: this.parent.value,
                 node: this.parent,
             })
-        }
-    }
-
-    get material() {
-        const parent = this.parent
-        if (parent instanceof CNode) {
-            const parentMaterial = parent.material
-            const allProps = flatProps(parentMaterial?.value.props || [])
-            const target = allProps.find((el) => el.name === this.name)
-            return target
-        } else {
-            return null
         }
     }
 

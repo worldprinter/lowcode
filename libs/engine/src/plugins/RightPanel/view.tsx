@@ -10,6 +10,7 @@ import { PropertyPanelConfig } from '../PropertyPanel'
 import { VisualPanelPlusConfig } from '../VisualPanelPlus'
 import styles from './style.module.scss'
 
+
 export type RightPanelOptions = { node: CNode | CRootNode; pluginCtx: CPluginCtx }
 
 export type CRightPanelItem = {

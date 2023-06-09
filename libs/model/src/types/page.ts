@@ -6,6 +6,7 @@ import type { FunctionPropType } from './node'
 import type { CRootNodeDataType } from './rootNode'
 import { CRootNodeDataTypeDescribe, FunctionPropertyTypeDescribe } from './rootNode'
 
+
 export type ComponentMetaType = {
     componentName: string
 } & LibMetaType

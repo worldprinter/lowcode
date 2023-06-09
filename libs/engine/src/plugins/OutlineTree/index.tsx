@@ -5,6 +5,7 @@ import type { CPlugin } from '../../core/pluginManager'
 import { TreeView } from './components/TreeView'
 import localize from './localize'
 
+
 export const PLUGIN_NAME = 'OutlineTree'
 const i18nNamespace = `plugin:${PLUGIN_NAME}`
 

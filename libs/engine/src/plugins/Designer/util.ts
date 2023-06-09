@@ -1,6 +1,10 @@
 import type { CNode, CPage, CProp, CRootNode, CSlot } from '@worldprinter/lowcode-model'
 import { isNodeModel } from '@worldprinter/lowcode-model'
 
+
+
+
+
 export const getClosestNodeList = (node: CNode | CRootNode, level = 5) => {
     const res = []
     let count = 0

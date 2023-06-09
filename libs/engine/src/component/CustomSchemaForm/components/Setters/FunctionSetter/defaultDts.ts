@@ -40,8 +40,8 @@ type ContextType = {
   storeManager?: StoreManager;
   /** 第三方辅助库 */
   thirdLibs?: Record<string, any>;
-};
+}
 
 /** 渲染上下文 */
 declare var $$context: ContextType;
-`;
+`

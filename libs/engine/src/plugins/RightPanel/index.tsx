@@ -1,7 +1,8 @@
 import React from 'react'
 
 import type { CPlugin } from '../../core/pluginManager'
-import { CRightPanelItem, RightPanel } from './view'
+import { RightPanel } from './view'
+
 
 const PLUGIN_NAME = 'RightPanel'
 export const RightPanelPlugin: CPlugin = (ctx) => {

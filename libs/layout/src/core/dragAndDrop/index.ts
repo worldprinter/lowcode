@@ -34,6 +34,16 @@ export class DragAndDrop {
     emitter = mitt<DragAndDropEventType>()
     // 拖动结束后是否可以触发点击事件
     canTriggerClick = true
+    flushSenorEventPriorityQueueMap = debounce((eventName: string) => {
+        const list = this.senorEventPriorityQueueMap[eventName]
+        this.senorEventPriorityQueueMap[eventName] = []
+        list.sort((a, b) => {
+            return b.priority - a.priority
+        })
+        list.forEach((e) => {
+            e.handle()
+        })
+    }, 10)
 
     constructor(options: {
         doc: Document
@@ -93,7 +103,7 @@ export class DragAndDrop {
             this.batchSensorEmit(dragEventName, draggingEventObj)
         })
 
-        sensor.emitter.on('onMouseUp', (e) => {
+        sensor.emitter.on('onMouseUp', () => {
             if (this.currentSensor !== null) {
                 return
             }
@@ -288,17 +298,6 @@ export class DragAndDrop {
             sensor.emitter.off('onMouseUp', onMouseUp)
         })
     }
-
-    flushSenorEventPriorityQueueMap = debounce((eventName: string) => {
-        const list = this.senorEventPriorityQueueMap[eventName]
-        this.senorEventPriorityQueueMap[eventName] = []
-        list.sort((a, b) => {
-            return b.priority - a.priority
-        })
-        list.forEach((e) => {
-            e.handle()
-        })
-    }, 10)
 
     cancelDrag() {
         this.currentState = 'CANCEL'

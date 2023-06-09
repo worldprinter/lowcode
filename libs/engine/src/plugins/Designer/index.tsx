@@ -12,12 +12,14 @@ import type { CPlugin } from '../../core/pluginManager'
 import { PLUGIN_NAME } from './config'
 import { Designer } from './view'
 
+
 export const DesignerPlugin: CPlugin = (ctx) => {
     const designerRef = React.createRef<Designer>()
     return {
         name: PLUGIN_NAME,
         async init(ctx) {
             const workbench = ctx.getWorkbench()
+
             workbench.replaceBodyView(
                 <Designer
                     ref={designerRef}

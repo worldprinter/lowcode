@@ -1,23 +1,19 @@
-/* eslint-disable react/no-find-dom-node */
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 import type { AssetPackage, CNode, CPage, CPageDataType, CRootNode } from '@worldprinter/lowcode-model'
 import { getRandomStr, InnerComponentNameEnum } from '@worldprinter/lowcode-model'
 import type { DesignRender, DesignRenderProp, RenderInstance } from '@worldprinter/lowcode-render'
+import { Box } from '@worldprinter/wdesign-core'
 
 import { DropAnchorCanvas } from './components/DropAnchor'
 import type { DropPosType } from './components/DropAnchor/util'
 import { calculateDropPosInfo } from './components/DropAnchor/util'
 import type { HighlightCanvasRefType } from './components/HighlightBox'
 import { HighlightCanvas } from './components/HighlightBox'
-import type { DragAndDropEventType } from './core/dragAndDrop'
-import { DragAndDrop } from './core/dragAndDrop'
-import type { Pointer } from './core/dragAndDrop/common'
-import type { SensorEventObjType } from './core/dragAndDrop/sensor'
-import { Sensor } from './core/dragAndDrop/sensor'
+import type { DragAndDropEventType, Pointer, SensorEventObjType } from './core/dragAndDrop'
+import { DragAndDrop, Sensor } from './core/dragAndDrop'
 import { IFrameContainer } from './core/iframeContainer'
-import styles from './index.module.scss'
 import type { DragAndDropEventObj } from './types/dragAndDrop'
 import { addEventListenerReturnCancel, animationFrame, collectVariable, flatObject } from './utils'
 
@@ -143,7 +139,9 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
             // 实时更新选中的节点的实例
             if (this.state.currentSelectId) {
                 const nodeId = this.state.currentSelectId
-                this.designRenderRef.current?.getInstancesById(nodeId) || []
+
+                this.designRenderRef.current?.getInstancesById(nodeId)
+
                 let instanceList = this.designRenderRef.current?.getInstancesById(nodeId) || []
                 instanceList = instanceList.filter((el) => el?._STATUS !== 'DESTROY')
                 if (!instanceList.length) {
@@ -185,9 +183,9 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
     init() {
         this.iframeContainer.destroy()
         this.iframeContainer = new IFrameContainer()
-
         ;(window as any).___CHAMELEON_DESIGNER_RENDER___ = this.designRenderRef
         const iframeContainer = this.iframeContainer
+
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         iframeContainer.load(document.getElementById(this.iframeDomId)!)
         iframeContainer.onLoadFailed((e) => {
@@ -264,18 +262,6 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
 
     getPageModel() {
         return this.designRenderRef?.current?.getPageModel()
-    }
-
-    private readyOk() {
-        this.setState({
-            ready: true,
-        })
-        const readyCbList = this.readyCbList
-        this.readyCbList = []
-        while (readyCbList.length) {
-            const cb = readyCbList.shift()
-            cb?.(this)
-        }
     }
 
     registerSelectEvent() {
@@ -406,7 +392,7 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
         if (!iframeDoc || !subWin) {
             return
         }
-        ['click', 'mouseover', 'mousedown', 'mouseup', 'mousemove'].forEach((ev: any) => {
+        ;['click', 'mouseover', 'mousedown', 'mouseup', 'mousemove'].forEach((ev: any) => {
             this.eventExposeHandler.push(
                 addEventListenerReturnCancel<'click'>(
                     iframeDoc.body,
@@ -562,7 +548,7 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
                 // 清空之前的选中
                 onSelectNode?.(null, eventObj.current)
             } else if (currentSelectDom?.length && dragStartDom?.length) {
-                // 如果当前选中的dom 不包含 拖动开始的元素
+                // 如果当前选中的 dom 不包含 拖动开始的元素
                 if (!currentSelectDom[0].contains(dragStartDom[0])) {
                     this.setState({
                         currentSelectId: startInstance._NODE_ID,
@@ -620,7 +606,7 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
             })
         })
 
-        sensor.emitter.on('dragEnd', (e) => {
+        sensor.emitter.on('dragEnd', () => {
             this.resetDrag()
             this.isCancelDrag = false
         })
@@ -748,11 +734,20 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
             ghostView = <>Ghost</>,
         } = this.props
         return (
-            <div
-                className={styles.layoutContainer}
+            <Box
+                sx={() => ({
+                    position: 'relative',
+                    width: '100%',
+                    height: '100%',
+                    boxSizing: 'border-box',
+                    margin: '0',
+                    padding: '0',
+                    overflow: 'hidden',
+                })}
+                className={'layout-container'}
                 id={iframeDomId}
             >
-                {/* 左上角添加显示元素名功能， hover */}
+                {/* 左上角添加显示元素名功能，hover */}
                 <HighlightCanvas
                     key={'highlightHoverCanvasRef'}
                     ref={this.highlightHoverCanvasRef}
@@ -767,7 +762,7 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
                     }}
                     toolRender={hoverToolBar}
                 />
-                {/* TODO:  选中框， 添加锁定功能 */}
+                {/* TODO:  选中框，添加锁定功能 */}
                 <HighlightCanvas
                     ref={this.highlightCanvasRef}
                     instances={selectComponentInstances}
@@ -797,8 +792,20 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
                         {ghostView}
                     </div>
                 )}
-            </div>
+            </Box>
         )
+    }
+
+    private readyOk() {
+        this.setState({
+            ready: true,
+        })
+        const readyCbList = this.readyCbList
+        this.readyCbList = []
+        while (readyCbList.length) {
+            const cb = readyCbList.shift()
+            cb?.(this)
+        }
     }
 }
 

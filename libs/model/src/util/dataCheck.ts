@@ -3,6 +3,7 @@ import { assert, StructError } from 'superstruct'
 
 import { isPlainObject } from './lodash'
 
+
 export type BaseDataCheckParameters = {
     data: any
     message?: string

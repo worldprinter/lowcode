@@ -5,6 +5,7 @@ import type { CPageDataType } from '@worldprinter/lowcode-model'
 import type { CPlugin, CPluginCtx } from '../../core/pluginManager'
 import { waitReactUpdate } from '../../utils'
 
+
 const PLUGIN_NAME = 'History'
 
 export const HistoryPlugin: CPlugin = (ctx) => {

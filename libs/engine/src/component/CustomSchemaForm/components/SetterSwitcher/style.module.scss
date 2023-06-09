@@ -1,14 +1,13 @@
-@import '../../../../assets/styles/mixin.scss';
 
 .switchBtn {
-  color: $fontColor;
+  color: rgb(104, 104, 104);
   font-size: 12px;
   padding: 0 5px 0 10px;
 }
 
 .shapeFieldBox,
 .collapseHeader {
-  color: $fontColor;
+  color: rgb(104, 104, 104);
   display: flex;
   font-size: 12px;
 }

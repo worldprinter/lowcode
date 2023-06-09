@@ -1,1 +1,1 @@
-export const PLUGIN_NAME = 'Designer';
+export const PLUGIN_NAME = 'Designer'

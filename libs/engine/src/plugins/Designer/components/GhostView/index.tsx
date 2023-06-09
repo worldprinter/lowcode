@@ -2,6 +2,10 @@ import React from 'react'
 
 import type { CNode, CRootNode } from '@worldprinter/lowcode-model'
 
+
+
+
+
 export const GhostView = ({ node }: { node: CNode | CRootNode }) => {
     return (
         <div

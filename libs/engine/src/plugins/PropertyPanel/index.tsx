@@ -8,6 +8,7 @@ import type { CPluginCtx } from '../../core/pluginManager'
 import type { CRightPanelItem } from '../RightPanel/view'
 import styles from './style.module.scss'
 
+
 export const PropertyPanel = (props: { node: CNode | CRootNode; pluginCtx: CPluginCtx }) => {
     const { node } = props
     const properties = node.material?.value.props || []

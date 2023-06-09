@@ -1,5 +1,3 @@
-@import '../../assets/styles/mixin.scss';
-
 .workbenchContainer {
   width: 100%;
   height: 100%;
@@ -9,7 +7,7 @@
   .topToolBarBox {
     height: 64px;
     width: 100%;
-    border-bottom: 1px solid $borderColor;
+    border-bottom: 1px solid rgb(233 233 233);
     display: flex;
 
     .topToolBarView {
@@ -28,10 +26,11 @@
       display: flex;
       background-color: #fff;
       z-index: 100;
+
       .pluginIconBar {
         width: 50px;
         height: 100%;
-        border-right: 1px solid $borderColor;
+        border-right: 1px solid rgb(233 233 233);
 
         .pluginIconItem {
           position: relative;
@@ -56,11 +55,11 @@
           }
 
           &.active ::before {
-            border-left: 4px solid $baseColor !important;
+            border-left: 4px solid #1677ff !important;
           }
 
           &:hover ::before {
-            border-left: 4px solid $hoverColor;
+            border-left: 4px solid rgba(22, 119, 255, 0.3);
           }
         }
       }
@@ -70,15 +69,16 @@
         flex-direction: column;
         background-color: #fff;
         z-index: 100;
-        border-right: 1px solid $borderColor;
+        border-right: 1px solid rgb(233 233 233);
 
         .pluginHeader {
           display: flex;
-          color: $fontColor;
+          color: rgb(104, 104, 104);
           height: 30px;
           margin: 10px;
           overflow: hidden;
           align-items: center;
+
           .pluginNameText {
             font-size: 16px;
             font-weight: 700;
@@ -86,21 +86,24 @@
             flex-wrap: nowrap;
             word-break: keep-all;
           }
+
           .closeBtn,
           .fixedBtn {
-            color: $fontColor;
+            color: rgb(104, 104, 104);
           }
 
           .fixedBtn {
             > * {
               transition: all 0.1s;
             }
+
             > .active {
               transform: rotate(-45deg);
             }
           }
         }
       }
+
       .pluginPanelBox {
         width: 100%;
         flex: 1;
@@ -111,6 +114,7 @@
 
     .rightResizeBox {
       position: relative;
+
       .arrowCursor {
         cursor: pointer;
         position: absolute;
@@ -122,15 +126,17 @@
         padding: 10px 3px;
         border-radius: 4px 0 0 4px;
         font-size: 12px;
+
         > .active {
           transform: rotate(-180deg);
         }
       }
+
       .rightBox {
         position: relative;
         width: 100%;
         height: 100%;
-        border-left: 1px $borderColor solid;
+        border-left: 1px rgb(233 233 233) solid;
       }
     }
 
@@ -139,17 +145,20 @@
       flex-direction: column;
       flex: 1;
       overflow: hidden;
+
       .subTopToolbarBox {
         width: 100%;
         height: 50px;
         background-color: #fff;
       }
+
       .canvasBox {
         width: 100%;
         flex: 1;
         overflow: hidden;
         padding: 20px 30px;
-        background-color: $baseBackgroundColor;
+        background-color: #edeff3;
+
         .scrollBox {
           width: 100%;
           height: 100%;

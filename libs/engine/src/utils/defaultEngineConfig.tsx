@@ -1,13 +1,17 @@
 import type { LayoutPropsType } from '@worldprinter/lowcode-layout'
 import { collectVariable, flatObject } from '@worldprinter/lowcode-layout'
 
+
+
+
+
 /** 默认使用 react 18 模式渲染 */
 export const beforeInitRender: LayoutPropsType['beforeInitRender'] = async ({ iframe }) => {
     const subWin = iframe.getWindow()
     if (!subWin) {
         return
     }
-    (subWin as any).React = window.React
+    ;(subWin as any).React = window.React
     ;(subWin as any).ReactDOM = window.ReactDOM
     ;(subWin as any).ReactDOMClient = (window as any).ReactDOMClient
 }

@@ -4,9 +4,9 @@
  * @returns
  */
 export const waitReactUpdate = (time?: number) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('ok');
-    }, time ?? 16);
-  });
-};
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('ok')
+        }, time ?? 16)
+    })
+}

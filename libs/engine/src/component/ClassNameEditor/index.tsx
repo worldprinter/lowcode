@@ -6,7 +6,6 @@ import { CNodePropsTypeEnum } from '@worldprinter/lowcode-model'
 
 import { CustomSchemaForm } from '../CustomSchemaForm'
 
-// import styles from './style.module.scss';
 
 export type ClassNameEditorProps = {
     initialValue?: { key: string; value: string }[]

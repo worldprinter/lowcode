@@ -55,9 +55,9 @@ class ErrorBoundary extends React.Component<
                 },
                 'Render error, node id: ',
                 schema.id,
-                ', node name：',
+                ', node name:',
                 schema.title,
-                ' component name：',
+                ' component name:',
                 schema.title || schema.componentName,
                 React.createElement('p', null, 'msg: ', String(this.state.error)),
                 React.createElement(

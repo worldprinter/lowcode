@@ -1,26 +1,27 @@
 export class VariableManager {
-  private varSpace = new Map();
+    private varSpace = new Map()
 
-  get(id: string) {
-    return this.varSpace.get(id);
-  }
-  add(id: string, handle: any) {
-    this.varSpace.set(id, handle);
-  }
+    get(id: string) {
+        return this.varSpace.get(id)
+    }
 
-  remove(id: string) {
-    this.varSpace.delete(id);
-  }
+    add(id: string, handle: any) {
+        this.varSpace.set(id, handle)
+    }
 
-  destroy() {
-    this.varSpace.clear();
-  }
+    remove(id: string) {
+        this.varSpace.delete(id)
+    }
 
-  getStateSnapshot() {
-    const res: Record<string, any> = {};
-    this.varSpace.forEach((val, key) => {
-      res[key] = val;
-    });
-    return res;
-  }
+    destroy() {
+        this.varSpace.clear()
+    }
+
+    getStateSnapshot() {
+        const res: Record<string, any> = {}
+        this.varSpace.forEach((val, key) => {
+            res[key] = val
+        })
+        return res
+    }
 }

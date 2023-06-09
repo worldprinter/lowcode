@@ -1,10 +1,9 @@
-@import '../../assets/styles/mixin.scss';
 
 .visualPanelBox {
   padding: 0 15px 300px;
 
   .header {
-    color: $fontColor;
+    color: rgb(104, 104, 104);
     display: flex;
   }
 }
@@ -13,7 +12,7 @@
 .ant-collapse .ant-collapse-item .ant-collapse-header {
   padding: 5px 5px 5px 10px;
   align-items: center;
-  color: $fontColor;
+  color: rgb(104, 104, 104);
   font-size: 12px;
 
   .ant-collapse-expand-icon {
