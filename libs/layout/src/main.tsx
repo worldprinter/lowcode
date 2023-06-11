@@ -181,6 +181,7 @@ export class Layout extends React.Component<LayoutPropsType, LayoutStateType> {
     }
 
     init() {
+        this.dnd.clearSensors()
         this.iframeContainer.destroy()
         this.iframeContainer = new IFrameContainer()
         ;(window as any).___CHAMELEON_DESIGNER_RENDER___ = this.designRenderRef
