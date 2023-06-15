@@ -1,5 +1,6 @@
 import { Tooltip } from 'antd'
-import React, { isValidElement, ReactNode, useEffect } from 'react'
+import type { ReactNode } from 'react'
+import React, { isValidElement, useEffect } from 'react'
 
 import { CFormContext } from '../context'
 import styles from './style.module.scss'

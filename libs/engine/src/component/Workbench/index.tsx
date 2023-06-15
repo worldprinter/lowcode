@@ -10,6 +10,7 @@ import React from 'react'
 import { waitReactUpdate } from '../../utils'
 import styles from './style.module.scss'
 
+
 export type PluginContext = {
     openPanel: () => void
     closePanel: () => void

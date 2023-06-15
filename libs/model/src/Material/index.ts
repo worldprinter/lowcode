@@ -1,4 +1,5 @@
-import { CMaterialStanderType, CMaterialType, CMaterialTypeDescribe, SnippetsType } from '../types/material'
+import type { CMaterialStanderType, CMaterialType, SnippetsType } from '../types/material'
+import { CMaterialTypeDescribe } from '../types/material'
 import { getRandomStr } from '../util'
 import { checkComplexData } from '../util/dataCheck'
 import { cloneDeep, isArray } from '../util/lodash'

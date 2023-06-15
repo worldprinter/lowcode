@@ -1,101 +1,62 @@
 {
-  "root": true,
-  "ignorePatterns": [
-    "**/*"
-  ],
-  "plugins": [
-    "@nx"
-  ],
-  "overrides": [
-    {
-      "files": [
-        "*.js",
-        "*.jsx",
-        "*.ts",
-        "*.tsx"
-      ],
-      "rules": {
-        "@nx/enforce-module-boundaries": [
-          "error",
-          {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
-              }
-            ]
-          }
-        ],
-        "@typescript-eslint/consistent-type-imports": [
-          "error",
-          {
-            "prefer": "type-imports",
-            "disallowTypeAnnotations": false,
-            "fixStyle": "separate-type-imports"
-          }
-        ],
-        "@typescript-eslint/ban-ts-comment": [
-          "off"
-        ],
-        "no-unused-vars": [
-          "off"
-        ],
-        "@typescript-eslint/no-unused-vars": [
-          "error",
-          {
-            "argsIgnorePattern": "^_"
-          }
-        ],
-        "@typescript-eslint/consistent-type-definitions": [
-          "error",
-          "type"
-        ],
-        "@typescript-eslint/consistent-type-exports": [
-          "error"
-        ],
-        "@typescript-eslint/no-explicit-any": [
-          "off"
-        ],
-        "@typescript-eslint/ban-types": [
-          "off"
-        ]
-      }
-    },
-    {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
-      "extends": [
-        "plugin:@nx/typescript"
-      ],
-      "rules": {}
-    },
-    {
-      "files": [
-        "*.js",
-        "*.jsx"
-      ],
-      "extends": [
-        "plugin:@nx/javascript"
-      ],
-      "rules": {}
-    },
-    {
-      "files": [
-        "*.spec.js",
-        "*.spec.jsx",
-        "*.spec.ts",
-        "*.spec.tsx"
-      ],
-      "env": {
-        "jest": true
-      },
-      "rules": {}
-    }
-  ]
+    "root": true,
+    "ignorePatterns": ["**/*"],
+    "plugins": ["@nx"],
+    "overrides": [
+        {
+            "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+            "rules": {
+                "@nx/enforce-module-boundaries": [
+                    "error",
+                    {
+                        "enforceBuildableLibDependency": true,
+                        "allow": [],
+                        "depConstraints": [
+                            {
+                                "sourceTag": "*",
+                                "onlyDependOnLibsWithTags": ["*"]
+                            }
+                        ]
+                    }
+                ],
+                "@typescript-eslint/consistent-type-imports": [
+                    "error",
+                    {
+                        "prefer": "type-imports",
+                        "disallowTypeAnnotations": false,
+                        "fixStyle": "separate-type-imports"
+                    }
+                ],
+                "@typescript-eslint/ban-ts-comment": ["off"],
+                "no-unused-vars": ["off"],
+                "@typescript-eslint/no-unused-vars": [
+                    "error",
+                    {
+                        "argsIgnorePattern": "^_"
+                    }
+                ],
+                "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+                "@typescript-eslint/consistent-type-exports": ["error"],
+                "@typescript-eslint/no-explicit-any": ["off"],
+                "@typescript-eslint/ban-types": ["off"]
+            }
+        },
+        {
+            "files": ["*.ts", "*.tsx"],
+            "extends": ["plugin:@nx/typescript"],
+            "rules": {}
+        },
+        {
+            "files": ["*.js", "*.jsx"],
+            "extends": ["plugin:@nx/javascript"],
+            "rules": {}
+        },
+        {
+            "files": ["*.spec.js", "*.spec.jsx", "*.spec.ts", "*.spec.tsx"],
+            "env": {
+                "jest": true
+            },
+            "rules": {}
+        }
+    ]
 }

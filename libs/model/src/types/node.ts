@@ -94,7 +94,7 @@ export const PropsDataStructDescribe: any = union([
     ),
 ])
 
-// 开发模式使用的 key,导出为生产模式时，需要移除
+// 开发模式使用的 key，导出为生产模式时，需要移除
 export const DevKey = ['configure']
 
 export type ClassNameType = {
@@ -147,7 +147,7 @@ export type CNodeDataType = {
     classNames?: ClassNameType[]
     css?: CSSType
     style?: Record<string, string | JSExpressionPropType>
-    // 组件引用的唯一id
+    // 组件引用的唯一 id
     refId?: string
     methods?: {
         name: string

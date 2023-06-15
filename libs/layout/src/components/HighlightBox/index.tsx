@@ -1,5 +1,4 @@
-import { useInViewport } from 'ahooks'
-import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
 
 import type { RenderInstance } from '@worldprinter/lowcode-render'
@@ -48,7 +47,6 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
     const { classes } = useStyles()
     const [styleObj, setStyleObj] = useState<Record<string, string>>({})
     const [rect, setRect] = useState<DOMRect>()
-    const [toolBoxRect, setToolBoxRect] = useState<DOMRect>()
     const ref = useRef<HighlightCanvasRefType>(null)
 
     const toolBoxRef = useRef<HTMLDivElement>(null)
@@ -131,27 +129,30 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
         }
         setStyleObj(tempObj)
 
-        setToolBoxRect(toolBoxRef.current?.getBoundingClientRect())
+        if (toolBoxRef.current) {
+            const toolBoxRect = toolBoxRef.current?.getBoundingClientRect()
+
+            const height = toolBoxRect?.height || 0
+
+            const isOutsideViewport = tempRect.top - height < 0
+
+            if (isOutsideViewport) {
+                // 向下去整 + 整个高度  + border 2px * 2
+                toolBoxRef.current.style.top = `calc( 100% + ${Math.floor(height)}px + 4px )`
+            } else {
+                toolBoxRef.current.style.top = `0px`
+            }
+        }
     }, [])
 
     useEffect(() => {
         updatePos()
-    }, [instance])
+    }, [instance, updatePos])
     ;(ref as any).current = {
         update() {
             updatePos()
         },
     }
-
-    const [, toolboxShowRatio] = useInViewport(toolBoxRef, {
-        root: toolBoxRef.current?.parentElement?.parentElement,
-    })
-
-    const boxTop = useMemo(() => {
-        return (toolboxShowRatio || 1) < 0.5
-            ? `calc( ${rect?.height || 0}px + ${toolBoxRect?.height || 0}px - 1px )`
-            : '0px'
-    }, [toolboxShowRatio, rect?.height, toolBoxRect?.height])
 
     if (!targetDom || !instance) {
         return <></>
@@ -171,9 +172,6 @@ export const HighlightBox = ({ instance, toolRender, getRef, onRefDestroy, style
                 <div
                     ref={toolBoxRef}
                     className={classes.toolBox}
-                    style={{
-                        top: boxTop,
-                    }}
                 >
                     {toolRender}
                 </div>

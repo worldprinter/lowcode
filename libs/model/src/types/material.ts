@@ -161,7 +161,7 @@ export type ShapeSetterObjType<T extends SetterBasicType = ''> = {
     componentName: ComplexSetterTypeEnum.SHAPE_SETTER | `${ComplexSetterTypeEnum.SHAPE_SETTER}` | T | `${T}`
     props?: {
         elements: MaterialPropType<T>[]
-        /** 是否可以收缩，默认： true  */
+        /** 是否可以收缩，默认：true  */
         collapse?: boolean
     } & {}
     initialValue: any
@@ -312,7 +312,7 @@ export const SnippetsTypeDescribe = object({
     snapshot: union([string(), any()]),
     snapshotText: optional(string()),
     description: optional(string()),
-    // 组件分类,用于搜索
+    // 组件分类，用于搜索
     tags: optional(array(string())),
     // 分 tab 面板
     groupName: optional(string()),
@@ -356,7 +356,7 @@ export type CMaterialType<PropsSetter extends string = ''> = {
     npm?: LibMetaType
     snippets: SnippetsType[]
     props: CMaterialPropsType<PropsSetter>
-    /** 固定的props, 不被 setter 的值覆盖 */
+    /** 固定的 props, 不被 setter 的值覆盖 */
     fixedProps?: Record<string, any> | ((props: Record<string, any>) => Record<string, any>)
     /** 可以拖入组件 */
     isContainer?: boolean | ContainerConfig
@@ -364,9 +364,9 @@ export type CMaterialType<PropsSetter extends string = ''> = {
     isLayout?: boolean
     /** 选择框的根选择器 */
     rootSelector?: string
-    /** 是否可以派发dom事件，默认被禁止： click、mousedown、mouseup 等等 */
+    /** 是否可以派发 dom 事件，默认被禁止：click、mousedown、mouseup 等等 */
     supportDispatchNativeEvent?: boolean | EventName[]
-    /** 组件支持的可被调用的方法， todo： 没有补充验证 类型 describe */
+    /** 组件支持的可被调用的方法，todo：没有补充验证 类型 describe */
     actions?: {
         title: string
         // 方法名
@@ -411,7 +411,7 @@ export const CMaterialTypeDescribe = object({
     title: string(),
     screenshot: optional(string()),
     icon: optional(string()),
-    // 组件分类,用于搜索
+    // 组件分类，用于搜索
     tags: optional(array(string())),
     // 分 tab 面板
     groupName: optional(string()),

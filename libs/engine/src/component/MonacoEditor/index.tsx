@@ -5,6 +5,10 @@ import type { editor } from 'monaco-editor'
 import type * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api'
 import React from 'react'
 
+
+
+
+
 export type Monaco = typeof monaco
 export type MonacoEditorInstance = monacoEditor.editor.IStandaloneCodeEditor
 

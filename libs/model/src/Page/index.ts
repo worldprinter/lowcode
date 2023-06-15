@@ -109,7 +109,7 @@ export class CPage {
     addNode(newNode: CNode, targetNode: CNode | CRootNode, pos: InsertNodePosType = 'AFTER') {
         if (pos === 'AFTER' || pos === 'BEFORE') {
             const parentNode = targetNode.parent
-            // 说明是容器节点, 只能插入 child
+            // 说明是容器节点，只能插入 child
             if (parentNode === null && targetNode instanceof CRootNode) {
                 console.warn('Not found parent node')
                 return false
@@ -307,7 +307,7 @@ export class CPage {
                 ...cloneDeep(it.value.npm || {}),
             } as ComponentMetaType
         })
-        // 剔除不合法的meta
+        // 剔除不合法的 meta
         const finalComponentsMetaList = componentsMetaList.filter((el) => {
             if (el.componentName && el.package && el.version) {
                 return true

@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { EditorPage } from './Editor'
 
+
 const router = createBrowserRouter([
     {
         path: '/',

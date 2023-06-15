@@ -194,6 +194,7 @@ const BaseComponentMeta: CMaterialType[] = [
                 title: '控制面板',
                 valueType: 'string',
                 setters: ['BooleanSetter', 'ExpressionSetter'],
+                defaultValue: true,
             },
             widthPropsMeta,
             heightPropsMeta,
@@ -267,7 +268,7 @@ const BaseComponentMeta: CMaterialType[] = [
                 name: 'content',
                 title: '内容',
                 valueType: 'string',
-                setters: ['TextAreaSetter', 'ExpressionSetter'],
+                setters: [{ componentName: 'StringSetter', initialValue: '文本内容' }, 'ExpressionSetter'],
             },
             customAttributesMeta,
         ],
@@ -277,9 +278,7 @@ const BaseComponentMeta: CMaterialType[] = [
                 snapshotText: 'Text',
                 category: '基础组件',
                 schema: {
-                    props: {
-                        content: 'text',
-                    },
+                    props: {},
                 },
             },
         ],

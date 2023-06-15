@@ -72,7 +72,8 @@ const CustomSchemaFormCore = (props: CustomSchemaFormProps, ref: Ref<CustomSchem
                     >
                         {properties.map((property) => {
                             if (isSpecialMaterialPropType(property)) {
-                                property.content
+                                // property.content
+                                return null
                             } else {
                                 const title = getMTitle(property.title)
                                 const tip = getMTitleTip(property.title)

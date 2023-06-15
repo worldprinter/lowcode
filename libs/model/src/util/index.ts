@@ -1,7 +1,7 @@
 import { isArray, isPlainObject, omitBy } from 'lodash-es'
 
 import { CNodePropsTypeEnum } from '../const/schema'
-import { CPage } from '../Page'
+import type { CPage } from '../Page'
 import { CRootNode } from '../Page/RootNode'
 import { CNode } from '../Page/RootNode/Node'
 import { CProp } from '../Page/RootNode/Node/prop'
