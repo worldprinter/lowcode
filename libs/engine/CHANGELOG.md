@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.5.0](https://github.com/worldprinter/lowcode/compare/v0.4.0...v0.5.0) (2023-06-15)
+
+
+### Features
+
+* 更新代码，修复 toolbox 位置 ([a28bb8e](https://github.com/worldprinter/lowcode/commit/a28bb8e0af9b6cb68afd2f0ba9f53c504a3716f0))
+
 ## [0.4.0](https://github.com/worldprinter/lowcode/compare/v0.3.0...v0.4.0) (2023-06-09)
 
 ### Features
