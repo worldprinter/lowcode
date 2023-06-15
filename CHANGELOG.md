@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.8.0](https://github.com/worldprinter/lowcode/compare/v0.7.0...v0.8.0) (2023-06-15)
+
+
+### Features
+
+* initialValue and build css ([3a8e2fd](https://github.com/worldprinter/lowcode/commit/3a8e2fdfc72cd15e97a3a99d08da0e610d410e95))
+
 ## [0.7.0](https://github.com/worldprinter/lowcode/compare/v0.6.0...v0.7.0) (2023-06-15)
 
 
