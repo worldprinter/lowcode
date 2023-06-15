@@ -2,6 +2,13 @@
 
 This file was generated using [@jscutlery/semver](https://github.com/jscutlery/semver).
 
+## [0.7.0](https://github.com/worldprinter/lowcode/compare/v0.6.0...v0.7.0) (2023-06-15)
+
+
+### Features
+
+* lowcode-engine packagejson output index.css ([4270dab](https://github.com/worldprinter/lowcode/commit/4270dab552b75a2add6d11040b25647972bc93f6))
+
 ## [0.6.0](https://github.com/worldprinter/lowcode/compare/v0.5.0...v0.6.0) (2023-06-15)
 
 
