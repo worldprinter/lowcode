@@ -13,7 +13,6 @@ import { CCustomSchemaFormContext } from './context'
 import styles from './style.module.scss'
 import { getSetterList } from './utils'
 
-
 export type CustomSchemaFormInstance = CForm
 
 export type CustomSchemaFormProps = {
@@ -72,7 +71,7 @@ const CustomSchemaFormCore = (props: CustomSchemaFormProps, ref: Ref<CustomSchem
                     >
                         {properties.map((property) => {
                             if (isSpecialMaterialPropType(property)) {
-                                // property.content
+                                console.log('Current not Support type config for props, wait future....')
                                 return null
                             } else {
                                 const title = getMTitle(property.title)

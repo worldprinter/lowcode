@@ -11,7 +11,6 @@ import { StringSetter } from './StringSetter'
 import { TextAreaSetter } from './TextAreaSetter'
 import type { CSetter } from './type'
 
-
 export default {
     StringSetter,
     ArraySetter,

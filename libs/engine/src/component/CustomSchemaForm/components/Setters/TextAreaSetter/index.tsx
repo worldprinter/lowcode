@@ -6,10 +6,9 @@ import type { CSetter, CSetterProps } from '../type'
 
 export const TextAreaSetter: CSetter<TextAreaProps> = ({
     onValueChange,
-    setterContext,
+    initialValue,
     ...props
 }: CSetterProps<TextAreaProps>) => {
-    const { keyPaths, onSetterChange } = setterContext
     return (
         <ConfigProvider
             theme={{
@@ -20,6 +19,7 @@ export const TextAreaSetter: CSetter<TextAreaProps> = ({
         >
             <Input.TextArea
                 {...props}
+                value={props.value ?? initialValue}
                 onChange={(e) => {
                     props.onChange?.(e)
                     onValueChange?.(e.target.value)

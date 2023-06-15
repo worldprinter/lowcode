@@ -7,10 +7,16 @@
     },
     "dependencies": {},
     "devDependencies": {},
-    "files": [
-        "index.css"
-    ],
     "exports": {
         "./index.css": "./index.css"
-    }
+    },
+    "files": [
+        "src",
+        "CHANGELOG.md",
+        "index.cjs",
+        "index.css",
+        "index.js",
+        "package.json",
+        "README.md"
+    ]
 }

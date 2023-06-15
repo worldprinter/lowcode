@@ -105,6 +105,7 @@ export const SetterSwitcher = ({ setters, keyPaths, condition, useField = true, 
     const setterProps = useMemo(() => {
         let newProps = {
             ...(currentSetter?.props || {}),
+            initialValue: currentSetter?.initialValue,
         }
         const target = setters.find((el) => el.componentName === currentSetter?.componentName)
         if (target) {

@@ -5,9 +5,7 @@ import type { MonacoEditorInstance } from '../../../../MonacoEditor'
 import { MonacoEditor } from '../../../../MonacoEditor'
 import type { CSetter, CSetterProps } from '../type'
 
-export const JSONSetter: CSetter<any> = ({ onValueChange, setterContext, ...props }: CSetterProps<any>) => {
-    const { keyPaths, onSetterChange } = setterContext
-
+export const JSONSetter: CSetter<any> = ({ onValueChange, initialValue, ...props }: CSetterProps<any>) => {
     const editorRef = useRef<MonacoEditorInstance | null>(null)
 
     const [open, setOpen] = useState(false)
@@ -60,7 +58,7 @@ export const JSONSetter: CSetter<any> = ({ onValueChange, setterContext, ...prop
                             onDidMount={(editor) => {
                                 editorRef.current = editor
                             }}
-                            initialValue={JSON.stringify(props.value || {}, null, 2)}
+                            initialValue={JSON.stringify(props.value ?? (initialValue || {}), null, 2)}
                             language={'json'}
                             options={{
                                 automaticLayout: true,

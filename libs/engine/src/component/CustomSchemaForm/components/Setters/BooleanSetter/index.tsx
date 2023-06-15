@@ -6,9 +6,9 @@ import type { CSetter, CSetterProps } from '../type'
 
 type BooleanSetterProps = SwitchProps
 
-export const BooleanSetter: CSetter<BooleanSetterProps> = ({
+export const BooleanSetter: CSetter<BooleanSetterProps & { initialValue?: boolean }> = ({
     onValueChange,
-    setterContext,
+    initialValue,
     ...props
 }: CSetterProps<BooleanSetterProps>) => {
     return (
@@ -21,7 +21,7 @@ export const BooleanSetter: CSetter<BooleanSetterProps> = ({
         >
             <Switch
                 {...props}
-                checked={props.value as boolean}
+                checked={(props.value ?? initialValue) as boolean}
                 onChange={(open, e) => {
                     props.onChange?.(open, e)
                     onValueChange?.(open)

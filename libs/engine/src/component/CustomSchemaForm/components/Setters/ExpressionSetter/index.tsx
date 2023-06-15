@@ -15,7 +15,7 @@ export type ExpressionSetterProps = CSetterProps<{
 
 export const ExpressionSetter: CSetter<ExpressionSetterProps> = ({
     onValueChange,
-    setterContext,
+    initialValue,
     ...props
 }: ExpressionSetterProps) => {
     return (
@@ -28,7 +28,7 @@ export const ExpressionSetter: CSetter<ExpressionSetterProps> = ({
         >
             <Input.TextArea
                 {...props}
-                value={props.value?.value || ''}
+                value={props.value?.value ?? (initialValue || '')}
                 onChange={(e) => {
                     props.onChange?.(e)
                     onValueChange?.({

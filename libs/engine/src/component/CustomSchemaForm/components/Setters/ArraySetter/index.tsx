@@ -28,13 +28,14 @@ function formatValue(value: unknown) {
 export const ArraySetter = ({
     onValueChange,
     setterContext,
-    item: { setters, initialValue },
+    item: { setters, initialValue: itemInitialValue },
+    initialValue,
     sortLabelKey,
     ...props
 }: CSetterProps<CArraySetterProps>) => {
     const { keyPaths, label } = setterContext
     const listValue: any[] = useMemo(() => {
-        return formatValue(props.value)
+        return formatValue(props.value ?? initialValue)
     }, [props.value])
 
     const [sortVisible, setSortVisible] = useState(false)
@@ -42,7 +43,7 @@ export const ArraySetter = ({
         setters || [
             {
                 component: 'StringSetter',
-            },
+            } as never,
         ],
     )
 
@@ -102,7 +103,7 @@ export const ArraySetter = ({
                 size='small'
                 onClick={() => {
                     const newVal = [...listValue]
-                    onValueChange?.([...newVal, initialValue ?? ''])
+                    onValueChange?.([...newVal, itemInitialValue ?? ''])
                 }}
             >
                 Add One

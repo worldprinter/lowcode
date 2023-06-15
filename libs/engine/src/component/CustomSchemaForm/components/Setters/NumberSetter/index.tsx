@@ -6,11 +6,9 @@ import type { CSetter, CSetterProps } from '../type'
 
 export const NumberSetter: CSetter<InputNumberProps> = ({
     onValueChange,
-    setterContext,
+    initialValue,
     ...props
 }: CSetterProps<InputNumberProps>) => {
-    const { keyPaths, onSetterChange } = setterContext
-
     return (
         <ConfigProvider
             theme={{
@@ -24,6 +22,7 @@ export const NumberSetter: CSetter<InputNumberProps> = ({
                     width: '100%',
                 }}
                 {...props}
+                value={props.value ?? initialValue}
                 onChange={(value) => {
                     props.onChange?.(value)
                     onValueChange?.(value)
