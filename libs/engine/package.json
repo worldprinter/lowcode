@@ -6,5 +6,11 @@
         "react-dom": ">=16.8.0"
     },
     "dependencies": {},
-    "devDependencies": {}
+    "devDependencies": {},
+    "files": [
+        "index.css"
+    ],
+    "exports": {
+        "./index.css": "./index.css"
+    }
 }
